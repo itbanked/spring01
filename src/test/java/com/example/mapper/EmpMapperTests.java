@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.domain.Emp;
+import com.example.util.Pagination;
 
 
 @RunWith(SpringRunner.class)
@@ -40,5 +41,15 @@ public class EmpMapperTests {
 			System.out.println(e);
 		
 	}
-
+	@Test
+	public void test02_selectPage(){
+		Pagination paging = new Pagination();
+		paging.setTotalItem(mapper.selectCountemp());
+		paging.setPageNo(2);
+		List<Emp> emps = mapper.selectPage(paging);
+		
+		for(Emp e : emps)
+			System.out.println(e);
+		
+	}
 }

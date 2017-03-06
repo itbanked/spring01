@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.CityMapper">
+<mapper namespace="com.example.mapper.CountryMapper">
 
-<resultMap type="com.example.domain.City" id="selectWithCountry">
-	<id property="id" column="city_id"/>
-	<result property="name" column="city_name"/>
-	<result property="countryCode" column="city_country_code"/>
-	<result property="district" column="city_district"/>
-	<result property="population" column="city_population"/>	
-	<association property="country" javaType="com.example.domain.Country">
+<resultMap type="com.example.domain.Country" id="countryWithCity">
 		<id property="code" column="country_code"/>
 		<result property="name" column="country_name"/>
 		<result property="continent" column="country_continent"/>
@@ -24,11 +18,18 @@
 		<result property="headOfState" column="country_head_of_state"/>
 		<result property="capital" column="country_capital"/>
 		<result property="code2" column="country_code2"/>
-	</association>
-
+		<collection property="citys" ofType="com.example.domain.City">
+		<id property="id" column="city_id"/>
+		<result property="name" column="city_name"/>
+		<result property="countryCode" column="city_country_code"/>
+		<result property="district" column="city_district"/>
+		<result property="population" column="city_population"/>	
+		</collection>
+	
 </resultMap>
 
-<select id="selectAllWithCountry" resultMap="selectWithCountry">
+
+<select id="selectAllWithCity" resultMap="countryWithCity">
 	select 
 		c2.ID				as city_id,	
 		c2.NAME				as city_name,
@@ -53,10 +54,13 @@
 		from country c1 left outer join city c2
 			on c1.CODE = c2.COUNTRY_CODE
 		where c1.code='KOR'
+</select>
+
+<select id="selectPageWithCity">
 
 </select>
 
-<select id="selectPageWithCountry" resultMap="selectWithCountry">
+<select id="selectByCodeWithCity" resultMap="countryWithCity">
 	select 
 		c2.ID				as city_id,	
 		c2.NAME				as city_name,
@@ -80,37 +84,7 @@
 		c1.CODE2			as country_code2
 		from country c1 left outer join city c2
 			on c1.CODE = c2.COUNTRY_CODE
-		offset #{fistItem} - 1 rows
-		 fetch next #{itemsPerPage} rows only
-
-</select>
-
-<select id="selectByIdWithCountry" resultMap="selectWithCountry">
-	select 
-		c2.ID				as city_id,	
-		c2.NAME				as city_name,
-		c2.COUNTRY_CODE		as city_country_code,
-		c2.DISTRICT			as city_district,
-		c2.POPULATION		as city_population,
-		c1.CODE 			as country_code,
-		c1.NAME 			as country_name,
-		c1.CONTINENT 		as country_continent,
-		c1.region			as couintry_region,
-		c1.SURFACE_AREA 	as country_surface_area,
-		c1.INDEP_YEAR		as country_indep_year,
-		c1.POPULATION 		as country_population,
-		c1.LIFE_EXPECTANCY	as country_life_expectancy,
-		c1.gnp				as country_gnp,
-		c1.GNP_OLD			as country_gnp_old,
-		c1.LOCAL_NAME		as country_local_name,
-		c1.GOVERNMENT_FORM	as country_government_form,
-		c1.HEAD_OF_STATE	as country_head_of_state,
-		c1.CAPITAL			as country_capital,
-		c1.CODE2			as country_code2
-		from country c1 left outer join city c2
-			on c1.CODE = c2.COUNTRY_CODE
-		where c2.id = #{id}
-
+		where c1.code=#{code}
 </select>
 
 </mapper>

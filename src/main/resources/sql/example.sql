@@ -43,3 +43,45 @@ select
 			on c1.CODE = c2.COUNTRY_CODE
 		where c1.code='KOR';
 		
+	--
+	--	City Paging
+	--	
+	select count(*) from city;
+	
+select * 
+  from city
+ order by id
+offset 40 rows
+ fetch next 10 rows only;
+ 
+ select *
+   from emp
+   order by empno
+  offset 10 rows
+ fetch next 10 rows only;
+
+
+	select 
+		c1.CODE 			as country_code,
+		c1.NAME 			as country_name,
+		c1.CONTINENT 		as country_continent,
+		c1.region			as couintry_region,
+		c1.SURFACE_AREA 	as country_surface_area,
+		c1.INDEP_YEAR		as country_indep_year,
+		c1.POPULATION 		as country_population,
+		c1.LIFE_EXPECTANCY	as country_life_expectancy,
+		c1.gnp				as country_gnp,
+		c1.GNP_OLD			as country_gnp_old,
+		c1.LOCAL_NAME		as country_local_name,
+		c1.GOVERNMENT_FORM	as country_government_form,
+		c1.HEAD_OF_STATE	as country_head_of_state,
+		c1.CAPITAL			as country_capital,
+		c1.CODE2			as country_code2,
+		c2.ID				as city_id,	
+		c2.NAME				as city_name,
+		c2.COUNTRY_CODE		as city_country_code,
+		c2.DISTRICT			as city_district,
+		c2.POPULATION		as city_population
+		from country c1 left outer join city c2
+			on c1.CODE = c2.COUNTRY_CODE
+		where c1.code='KOR';
