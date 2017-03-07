@@ -85,3 +85,72 @@ offset 40 rows
 		from country c1 left outer join city c2
 			on c1.CODE = c2.COUNTRY_CODE
 		where c1.code='KOR';
+
+select count(*) 
+  from city
+ where country_code = 'KOR';		
+
+-- 		
+-- selectPage
+-- 
+select * 
+  from city
+ where country_code = 'KOR'
+ order by id
+ offset 2 rows 
+  fetch next 3 rows only;
+-- 
+-- selectPageWithCountry
+-- 
+select * 
+  from city c1 left outer join country c2
+ on c1.COUNTRY_CODE = c2.CODE
+ where c1.country_code = 'KOR'
+ order by id
+ offset 2 rows 
+  fetch next 3 rows only; 
+
+-- 		
+-- CountryMapper.selectPage
+select *
+  from country
+ order by code
+offset 2 rows
+fetch next 3 rows only;
+
+select *
+  from city
+ where country_code = 'AGO';
+ 
+ select *
+  from city
+ where country_code = 'AIA';
+
+select *
+  from city
+ where country_code = 'ALB';
+
+--	
+-- CountryMapper.selectPageWithCity
+select * 
+  from country c1 left outer join city c2 
+ on c1.code = c2.country_code
+ order by code
+offset 2 rows
+fetch next 3 rows only;
+		
+		
+select 
+		d.deptno	as	dept_deptno,
+		d.dname		as	dept_dname,
+		d.loc		as	dept_loc,
+		e.empno		as	emp_empno,
+		e.ename		as	emp_ename,
+		e.job		as	emp_job,
+		e.mgr		as	emp_mgr,
+		e.hiredate	as	emp_hiredate,
+		e.sal		as	emp_sal,
+		e.comm		as	emp_comm,
+		e.deptno	as	emp_deptno 
+   from dept d left outer join emp e
+ on d.deptno = e.deptno;

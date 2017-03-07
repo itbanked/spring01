@@ -1,6 +1,7 @@
 package com.example.country.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.country.service.CountrySearchService;
 import com.example.domain.Country;
-import com.example.mapper.CountryMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,6 +37,22 @@ public class CountrySearchServiceTests {
 		
 		for(Country c : list)
 			System.out.println(c);
+	}
+	@Test
+	public void test02_getPage(){
+		Map<String , Object> map = service.getPage(1);
+		System.out.println(map.get("countrys"));
+		System.out.println(map.get("paging"));
+	}
+	@Test
+	public void test02_getPage_WithCountry(){
+		Map<String , Object> map = service.getPage(1,true);
+		
+		List<Country>list = (List<Country>)map.get("countrys");
+		for(Country c : list)
+			System.out.println(c);
+		
+		System.out.println(map.get("paging"));
 	}
 	@Test
 	public void test03_getByCode(){

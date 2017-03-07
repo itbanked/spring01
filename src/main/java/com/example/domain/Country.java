@@ -25,6 +25,13 @@ public class Country {
 	private String code2;
 	private List<City> citys;
 
+	public List<City> getCitys() {
+		return citys;
+	}
+	
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
+	}
 
 	public Country() {
 		// TODO Auto-generated constructor stub
@@ -46,13 +53,6 @@ public class Country {
 		return str;
 	}
 	
-	public List<City> getCitys() {
-		return citys;
-	}
-	
-	public void setCitys(List<City> citys) {
-		this.citys = citys;
-	}
 	
 	public String getCode() {
 		return code;
