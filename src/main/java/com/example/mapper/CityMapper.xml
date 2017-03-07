@@ -29,87 +29,84 @@
 </resultMap>
 
 <select id="selectAllWithCountry" resultMap="selectWithCountry">
-	select 
-		c2.ID				as city_id,	
-		c2.NAME				as city_name,
-		c2.COUNTRY_CODE		as city_country_code,
-		c2.DISTRICT			as city_district,
-		c2.POPULATION		as city_population,
-		c1.CODE 			as country_code,
-		c1.NAME 			as country_name,
-		c1.CONTINENT 		as country_continent,
-		c1.region			as couintry_region,
-		c1.SURFACE_AREA 	as country_surface_area,
-		c1.INDEP_YEAR		as country_indep_year,
-		c1.POPULATION 		as country_population,
-		c1.LIFE_EXPECTANCY	as country_life_expectancy,
-		c1.gnp				as country_gnp,
-		c1.GNP_OLD			as country_gnp_old,
-		c1.LOCAL_NAME		as country_local_name,
-		c1.GOVERNMENT_FORM	as country_government_form,
-		c1.HEAD_OF_STATE	as country_head_of_state,
-		c1.CAPITAL			as country_capital,
-		c1.CODE2			as country_code2
-		from country c1 left outer join city c2
-			on c1.CODE = c2.COUNTRY_CODE
-		where c1.code='KOR'
+	select 	c1.id				as city_id,
+			c1.name				as city_name,
+			c1.country_code		as city_country_code,
+			c1.district			as city_district,
+			c1.population		as city_population,
+			c2.code				as country_code,
+			c2.name				as country_name,
+			c2.continent		as country_continent,
+			c2.region			as country_region,
+			c2.surface_area		as country_surface_area,
+			c2.indep_year		as country_indep_year,
+			c2.population		as country_population,
+			c2.life_expectancy	as country_life_expectancy,
+			c2.gnp				as country_gnp,
+			c2.gnp_old			as country_gnp_old,
+			c2.local_name		as country_local_name,
+			c2.government_form	as country_government_form,
+			c2.head_of_state	as country_head_of_state,
+			c2.capital			as country_capital,
+			c2.code2			as country_code2
+	  from city c1 left outer join country c2
+	    on c1.country_code = c2.code
+where c1.country_code = 'KOR'
 
 </select>
 
 <select id="selectPageWithCountry" resultMap="selectWithCountry">
-	select 
-		c2.ID				as city_id,	
-		c2.NAME				as city_name,
-		c2.COUNTRY_CODE		as city_country_code,
-		c2.DISTRICT			as city_district,
-		c2.POPULATION		as city_population,
-		c1.CODE 			as country_code,
-		c1.NAME 			as country_name,
-		c1.CONTINENT 		as country_continent,
-		c1.region			as couintry_region,
-		c1.SURFACE_AREA 	as country_surface_area,
-		c1.INDEP_YEAR		as country_indep_year,
-		c1.POPULATION 		as country_population,
-		c1.LIFE_EXPECTANCY	as country_life_expectancy,
-		c1.gnp				as country_gnp,
-		c1.GNP_OLD			as country_gnp_old,
-		c1.LOCAL_NAME		as country_local_name,
-		c1.GOVERNMENT_FORM	as country_government_form,
-		c1.HEAD_OF_STATE	as country_head_of_state,
-		c1.CAPITAL			as country_capital,
-		c1.CODE2			as country_code2
-		from country c1 left outer join city c2
-			on c1.CODE = c2.COUNTRY_CODE
-		offset #{fistItem} - 1 rows
-		 fetch next #{itemsPerPage} rows only
+	select 	c1.id				as city_id,
+			c1.name				as city_name,
+			c1.country_code		as city_country_code,
+			c1.district			as city_district,
+			c1.population		as city_population,
+			c2.code				as country_code,
+			c2.name				as country_name,
+			c2.continent		as country_continent,
+			c2.region			as country_region,
+			c2.surface_area		as country_surface_area,
+			c2.indep_year		as country_indep_year,
+			c2.population		as country_population,
+			c2.life_expectancy	as country_life_expectancy,
+			c2.gnp				as country_gnp,
+			c2.gnp_old			as country_gnp_old,
+			c2.local_name		as country_local_name,
+			c2.government_form	as country_government_form,
+			c2.head_of_state	as country_head_of_state,
+			c2.capital			as country_capital,
+			c2.code2			as country_code2
+	  from city c1 left outer join country c2
+	    on c1.country_code = c2.code
+	offset #{firstItem} - 1 rows
+fetch next #{itemsPerPage} rows only 
 
 </select>
 
 <select id="selectByIdWithCountry" resultMap="selectWithCountry">
-	select 
-		c2.ID				as city_id,	
-		c2.NAME				as city_name,
-		c2.COUNTRY_CODE		as city_country_code,
-		c2.DISTRICT			as city_district,
-		c2.POPULATION		as city_population,
-		c1.CODE 			as country_code,
-		c1.NAME 			as country_name,
-		c1.CONTINENT 		as country_continent,
-		c1.region			as couintry_region,
-		c1.SURFACE_AREA 	as country_surface_area,
-		c1.INDEP_YEAR		as country_indep_year,
-		c1.POPULATION 		as country_population,
-		c1.LIFE_EXPECTANCY	as country_life_expectancy,
-		c1.gnp				as country_gnp,
-		c1.GNP_OLD			as country_gnp_old,
-		c1.LOCAL_NAME		as country_local_name,
-		c1.GOVERNMENT_FORM	as country_government_form,
-		c1.HEAD_OF_STATE	as country_head_of_state,
-		c1.CAPITAL			as country_capital,
-		c1.CODE2			as country_code2
-		from country c1 left outer join city c2
-			on c1.CODE = c2.COUNTRY_CODE
-		where c2.id = #{id}
+select 	c1.id				as city_id,
+			c1.name				as city_name,
+			c1.country_code		as city_country_code,
+			c1.district			as city_district,
+			c1.population		as city_population,
+			c2.code				as country_code,
+			c2.name				as country_name,
+			c2.continent		as country_continent,
+			c2.region			as country_region,
+			c2.surface_area		as country_surface_area,
+			c2.indep_year		as country_indep_year,
+			c2.population		as country_population,
+			c2.life_expectancy	as country_life_expectancy,
+			c2.gnp				as country_gnp,
+			c2.gnp_old			as country_gnp_old,
+			c2.local_name		as country_local_name,
+			c2.government_form	as country_government_form,
+			c2.head_of_state	as country_head_of_state,
+			c2.capital			as country_capital,
+			c2.code2			as country_code2
+	  from city c1 left outer join country c2
+	    on c1.country_code = c2.code
+where c1.id = #{id}
 
 </select>
 

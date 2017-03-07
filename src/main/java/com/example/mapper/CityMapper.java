@@ -17,7 +17,7 @@ public interface CityMapper {
 	@Select("select * from city")
 	List<City> selectAll();
 	
-	List<City> selectAllWithCountry();
+	List<City> selectAllWithCountry(); // country left outer join city
 	
 	@Select({
 		"select *",
@@ -26,12 +26,12 @@ public interface CityMapper {
 		"offset #{firstItem}-1 rows",
 		" fetch next #{itemsPerPage} rows only"
 	})
-	List<City> selectPage(Pagination paging);
-	List<City> selectPageWithCountry(Pagination paging);
+	List<City> selectPage(Pagination paging);		//10Line paging
+	List<City> selectPageWithCountry(Pagination paging);	//country left outer join city && 10Line Paging
 	
 	@Select("select * from city where id=#{id}")
-	City selectById(int id);
-	City selectByIdWithCountry(int id);
+	City selectById(int id);			//city id
+	City selectByIdWithCountry(int id);	//country left outer join city && id
 	
 
 }

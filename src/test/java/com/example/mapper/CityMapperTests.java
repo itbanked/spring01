@@ -57,7 +57,7 @@ public class CityMapperTests {
 	public void test02_selectPageWithCountry(){
 		Pagination paging = new Pagination();
 		paging.setTotalItem(mapper.selectTotalCount());
-		paging.setPageNo(1000);
+		paging.setPageNo(1);
 		
 		List<City> list = mapper.selectPageWithCountry(paging);
 		
