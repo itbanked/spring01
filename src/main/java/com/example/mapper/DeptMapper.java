@@ -6,9 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.domain.Dept;
+import com.example.util.Pagination;
 
 @Mapper
 public interface DeptMapper {
+	
+	@Select("select count(*) from dept")
+	int selectDeptCount();
 
 	@Select("select * from dept")
 	List<Dept> selectAll();
@@ -18,11 +22,11 @@ public interface DeptMapper {
 		"select *							",
 		"  from dept						",
 		"order by deptno					",
-		"offset #{fisrtItem} -1 rows		",
+		"offset #{firstItem} -1 rows		",
 		"fetch next #{itemsPerPage} rows only"
 	})
-	List<Dept> selectPage();
-	List<Dept> selectPageWithEmp();
+	List<Dept> selectPage(Pagination paging);
+	List<Dept> selectPageWithEmp(Pagination paging);
 	
 	@Select("select * from dept where deptno=#{deptno}")
 	Dept selectByDeptno(int deptno);

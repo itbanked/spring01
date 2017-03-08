@@ -154,3 +154,5 @@ select
 		e.deptno	as	emp_deptno 
    from dept d left outer join emp e
  on d.deptno = e.deptno;
+ 
+ select * from emp;

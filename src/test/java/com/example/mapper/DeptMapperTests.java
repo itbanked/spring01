@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.domain.Dept;
 import com.example.exception.NotFoundRuntimeException;
+import com.example.util.Pagination;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,6 +38,26 @@ public class DeptMapperTests {
 		for(Dept d : list)
 			System.out.println(d);
 	}
+	@Test
+	public void test02_selectPage(){
+		Pagination paging = new Pagination();
+		paging.setTotalItem(mapper.selectDeptCount());
+		paging.setPageNo(1);
+		
+		List<Dept> list = mapper.selectPage(paging);
+		for(Dept d : list)
+			System.out.println(d);
+	}
+	@Test
+	public void test02_selectPageWithEmp(){
+		Pagination paging = new Pagination();
+		paging.setTotalItem(mapper.selectDeptCount());
+		paging.setPageNo(1);
+		
+		List<Dept> list = mapper.selectPageWithEmp(paging);
+		for(Dept d : list)
+			System.out.println(d);
+	}	
 	
 	@Test
 	public void test03_selectByDeptno(){

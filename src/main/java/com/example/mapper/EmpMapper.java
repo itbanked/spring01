@@ -27,5 +27,9 @@ public interface EmpMapper {
 		" fetch next #{itemsPerPage} rows only"
 	})
 	List<Emp> selectPage(Pagination paging);
-	List<Emp> selectPageWithDept();
+	List<Emp> selectPageWithDept(Pagination paging);
+	
+	@Select("select * from emp where empno = #{empno}")
+	Emp selectByEmpno(int empno);
+	Emp selectByEmpnoWithDept(int empno);
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.Country;
+import com.example.exception.NotFoundRuntimeException;
 import com.example.mapper.CountryMapper;
 import com.example.util.Pagination;
 
@@ -65,6 +66,9 @@ public class CountrySearchService {
 			country = countrymapper.selectByCodeWithCity(code);
 		else
 			country = countrymapper.selectByCode(code);
+		
+		if(country == null)
+			throw new NotFoundRuntimeException("Country가 없습니다");
 		
 		return country;
 	}

@@ -35,6 +35,21 @@ select
  on d.deptno = e.deptno
 </select>
 
+<resultMap type="com.example.domain.Dept" id="deptWithEmp2">
+	<collection property="emps" column="dept_deptno" select="selectEmpsByDept"/>
+</resultMap>
+<select id="selectEmpsByDept" resultType="com.example.domain.Emp">
+	select *
+	  from emp e
+	 where e.deptno = #{dept_deptno}
+</select>
+<select id="selectPageWithEmp" resultMap="deptWithEmp2">
+	select d.*, d.deptno as dept_deptno
+	  from dept d
+	  offset #{firstItem}-1 rows
+	 fetch next #{itemsPerPage} rows only
+</select>
+
 <select id="selectByDeptnoWithEmp" resultMap="deptWithEmp">
 select 
 		d.deptno	as	dept_deptno,

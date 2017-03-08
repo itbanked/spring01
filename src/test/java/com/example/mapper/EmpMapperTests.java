@@ -30,7 +30,6 @@ public class EmpMapperTests {
 		
 		for(Emp e : emps)
 			System.out.println(e);
-		
 	}
 	
 	@Test
@@ -39,7 +38,6 @@ public class EmpMapperTests {
 		
 		for(Emp e : emps)
 			System.out.println(e);
-		
 	}
 	@Test
 	public void test02_selectPage(){
@@ -49,7 +47,27 @@ public class EmpMapperTests {
 		List<Emp> emps = mapper.selectPage(paging);
 		
 		for(Emp e : emps)
-			System.out.println(e);
+			System.out.println(e);	
+	}
+	@Test
+	public void test02_selectPageWithDept(){
+		Pagination paging = new Pagination();
+		paging.setTotalItem(mapper.selectCountemp());
+		paging.setPageNo(1);
+		List<Emp> emps = mapper.selectPageWithDept(paging);
 		
+		for(Emp e : emps)
+			System.out.println(e);
+	}
+	@Test
+	public void test03_selectByEmpno(){
+		Emp e = mapper.selectByEmpno(7369);
+			System.out.println(e);
+	}
+	
+	@Test
+	public void test03_selectAllWithDept(){
+		Emp e = mapper.selectByEmpnoWithDept(7369);
+			System.out.println(e);
 	}
 }
