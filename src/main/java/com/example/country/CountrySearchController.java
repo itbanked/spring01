@@ -1,6 +1,7 @@
 package com.example.country;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,6 +33,16 @@ public class CountrySearchController {
 		model.addAttribute("list", list);
 		
 		return "country/list";
+	}
+	
+	@GetMapping("/page/{pageNo}")
+	public String getPage(@PathVariable int pageNo, Model model){
+		log.info("getPage(" + pageNo + ")");
+		
+		Map<String, Object> page = countrySearchService.getPage(pageNo);
+		model.addAttribute("page", page);
+		
+		return "country/page";
 	}
 	
 	
