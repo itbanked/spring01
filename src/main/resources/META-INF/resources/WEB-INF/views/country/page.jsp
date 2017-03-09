@@ -16,19 +16,34 @@
 <script type="text/javascript" src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <!-- 4. bootstrap.js -->
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+<!-- code_assist -->
+<c:if test="false">
+<link rel="stylesheet" href="../code_assist/animate.css">
+<link rel="stylesheet" href="../code_assist/bootstrap.css">
+</c:if>
+
+<style type="text/css">
+	a:hover{
+		text-decoration: none
+	}
+</style>
+
 </head>
 <body>
 <c:set var="countrys" 	value="${page.countrys}"/>
 <c:set var="paging" 	value="${page.paging}"/>
 
-<h1>Country Page List pageNo = ${paging.pageNo}</h1>
+<h1 class="text-info bg-success ">Country Page List pageNo = ${paging.pageNo}</h1>
 
 <!-- 향상된 for문 -->
 <c:forEach var="c" items="${countrys}" varStatus="status">
-	<b>${status.index + 1} : </b> ${c.code} ${c.name} ${c.population}<br>
+	<b class="text-muted">${status.index + 1} </b> <span class="text-danger"> : ${c.code} ${c.name} ${c.population}</span> <br>
 </c:forEach>
 <hr>
+<button class="btn btn-info animated bounce">
 ${paging}
+</button>
 <hr>
 <%-- <c:if test="${paging.firstGroup == false}"> --%>
 <%-- <a href="/country/page/${paging.firstPage - 1}">Prev</a> --%>
@@ -36,17 +51,17 @@ ${paging}
 
 <c:choose>
 <c:when test="${paging.firstGroup == true}">
-<a href="/country/page/${paging.firstPage}">Prev</a>
+<a href="/country/page/${paging.firstPage}" class="alert alert-info">Prev</a>
 </c:when>
 <c:when test="${paging.firstGroup == false}">
-<a href="/country/page/${paging.firstPage - 1}">Prev</a>
+<a href="/country/page/${paging.firstPage - 1}" class="alert alert-info">Prev</a>
 </c:when>
 </c:choose>
 
 
 <!-- 전통적인 for문 -->
 <c:forEach var="i" begin="${paging.firstPage}" end="${paging.lastPage}">
-	<a href="/country/page/${i}">${i}</a>
+	<a href="/country/page/${i}" class="btn btn-info btn-sm">${i}</a>
 </c:forEach>
 
 <%-- <c:if test="${paging.lastGroup == false}"> --%>
@@ -55,15 +70,16 @@ ${paging}
 
 <c:choose>
 <c:when test="${paging.lastGroup == true}">
-<a href="/country/page/${paging.lastPage}">Next</a>
+<a href="/country/page/${paging.lastPage}" class="alert alert-info">Next</a>
 </c:when>
 <c:when test="${paging.lastGroup == false}">
-<a href="/country/page/${paging.lastPage + 1}">Next</a>
+<a href="/country/page/${paging.lastPage + 1}" class="alert alert-info">Next</a>
 </c:when>
-
-
 </c:choose>
 
 
+<script type="text/javascript">
+
+</script>
 </body>
 </html>
