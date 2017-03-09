@@ -1,4 +1,4 @@
-package com.example.country;
+package com.example.city;
 
 import java.util.List;
 import java.util.Map;
@@ -12,50 +12,50 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.country.service.CountrySearchService;
-import com.example.domain.Country;
+import com.example.city.service.CitySearchService;
+import com.example.domain.City;
 import com.example.exception.NotFoundRuntimeException;
 
 @Controller
-@RequestMapping("/country")
-public class CountrySearchController {
+@RequestMapping("/city")
+public class CitySearchController {
 
-	static Log log = LogFactory.getLog(CountrySearchController.class);
+	static Log log = LogFactory.getLog(CitySearchController.class);
 	
 	@Autowired
-	CountrySearchService countrySearchService;
+	CitySearchService citySearchService;
 	
-	@GetMapping("/list")
+	@GetMapping("list")
 	public String getList(Model model){
 		log.info("getList()");
 		
-		List<Country> list = countrySearchService.getListAll();
-		model.addAttribute("list", list);
+		List<City> list = citySearchService.getListAll(true);
+		model.addAttribute("citys", list);
 		
-		return "country/list";
+		return "city/list";
 	}
-	
-	@GetMapping("/page/{pageNo}")
+
+	@GetMapping("page/{pageNo}")
 	public String getPage(@PathVariable int pageNo, Model model){
 		log.info("getPage(" + pageNo + ")");
 		
-		Map<String, Object> page = countrySearchService.getPage(pageNo);
+		Map<String,Object> page = citySearchService.getPage(pageNo);
 		model.addAttribute("page", page);
 		
-		return "country/page";
+		return "city/page";
 	}
-	
-	
-	@GetMapping("/item/{code}")
-	public String getItem(@PathVariable String code, Model model){
-		log.info("getItem(" + code + ")");
+	@GetMapping("item/{id}")
+	public String getItemById(@PathVariable int id, Model model){
+		log.info("getItem(" + id +  ")" );
 		
 		try{
-			Country c = countrySearchService.getByCode(code, true);
-			model.addAttribute("country", c);
+			City city = citySearchService.getCityById(id, true);
+			model.addAttribute("city", city);
 		}catch(NotFoundRuntimeException e){
 			model.addAttribute("error", e.getMessage());
 		}
-		return "/country/item";
+		
+		return "city/item";
 	}
+	
 }

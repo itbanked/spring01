@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>item.jsp</title>
+<title>page.jsp</title>
 <!-- 1. animate -->
 <link rel="stylesheet" href="/webjars/animate.css/3.5.2/animate.min.css">
 <!-- 2. bootstrap -->
@@ -16,7 +16,6 @@
 <script type="text/javascript" src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 <!-- 4. bootstrap.js -->
 <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-
 <!-- code_assist -->
 <c:if test="false">
 <link rel="stylesheet" href="../code_assist/animate.css">
@@ -24,29 +23,23 @@
 </c:if>
 </head>
 <body>
-${error}<br>
+<h1>City Page pageNo = ${page.paging.pageNo}</h1>
+	
+<ol class="list-group">
+	<c:forEach var="city" items="${page.citys}">
+		<li class="list-group-item-info animated zoomIn">${city.id}, <a href="/city/item/${city.id}?pageNo=${page.paging.pageNo}">${city.name}</a>, ${city.population}, ${city.countryCode}</li>
+	</c:forEach>
+</ol>
+<hr class="animated bounce">
 
-<table class="table table-bordered">
-	<tr class="bg-info text-warning">
-		<th>Country Code</th><th>Country Name</th><th>Country Population</th></tr>
-	<tr class="text-info">
-		<td>${country.code}</td> <td>${country.name}</td> <td>${country.population}</td>
-	</tr>
-</table>
+<a href="/city/page/1">First</a>
+<a href="/city/page/${page.paging.firstPage-10}">Prev</a>
 
-<table class="table table-bordered table-striped">
-	<tr class="text-danger">
-		<th>City Id</th><th>City Name</th><th>City Population</th>
-	</tr>
-<c:forEach var="citys" items="${country.citys}">
-	<tr class="bg-warning text-info">
-		<td>${citys.id}</td> <td>${citys.name}</td> <td>${citys.population}</td>
-	</tr>
+<c:forEach var="i" begin="${page.paging.firstPage}" end="${page.paging.lastPage}">
+	<a href="/city/page/${i}">${i}</a>
 </c:forEach>
-</table>
 
-<p style="border:1px solid black;">
-${country}
-</p>
+<a href="/city/page/${page.paging.lastPage+1}">Next</a>
+<a href="/city/page/${page.paging.totalPage}">Last</a>
 </body>
 </html>
