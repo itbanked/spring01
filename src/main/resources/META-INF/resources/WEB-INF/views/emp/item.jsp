@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>item.jsp</title>
+<title>list.jsp</title>
 <!-- code_assist -->
 <c:if test="false">
 <link rel="stylesheet" href="../code_assist/animate.css">
@@ -15,13 +15,6 @@
 </c:if>
 </head>
 <body>
-<h1>City Detail Info</h1>
-
-${city}
-<hr>
-${city.country}
-<hr>
-<a href="/city/page/${param.pageNo}">이전 page List로</a>
 
 </body>
 </html>
