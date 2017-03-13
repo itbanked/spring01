@@ -48,13 +48,15 @@ public class CitySearchController {
 	public String getItemById(@PathVariable int id, Model model){
 		log.info("getItem(" + id +  ")" );
 		
-		try{
-			City city = citySearchService.getCityById(id, true);
-			model.addAttribute("city", city);
-		}catch(NotFoundRuntimeException e){
-			model.addAttribute("error", e.getMessage());
-		}
-		
+		City city = citySearchService.getCityById(id, true);
+		model.addAttribute("city", city);
+
+//		try{
+//			City city = citySearchService.getCityById(id, true);
+//			model.addAttribute("city", city);
+//		}catch(NotFoundRuntimeException e){
+//			model.addAttribute("error", e.getMessage());
+//		}		
 		return "city/item";
 	}
 	

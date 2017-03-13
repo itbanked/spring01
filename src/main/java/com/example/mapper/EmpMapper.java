@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -11,6 +12,9 @@ import com.example.util.Pagination;
 @Mapper
 public interface EmpMapper {
 	
+	/*
+	 * 1. select
+	 */
 	@Select("select count(*) from emp")
 	int selectCountemp();
 	
@@ -32,4 +36,18 @@ public interface EmpMapper {
 	@Select("select * from emp where empno = #{empno}")
 	Emp selectByEmpno(int empno);
 	Emp selectByEmpnoWithDept(int empno);
+	
+	/*
+	 * 2. insert
+	 */
+	int insert(Emp emp);
+	/*
+	 * 3. update
+	 */
+	int updateByEmpno(Emp emp);
+	/*
+	 * 4. delete
+	 */
+	@Delete("delete from emp where empno=#{empno}")
+	int deleteByEmpno(int empno);
 }

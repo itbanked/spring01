@@ -83,7 +83,7 @@
 		c1.INDEP_YEAR		as country_indep_year,
 		c1.POPULATION 		as country_population,
 		c1.LIFE_EXPECTANCY	as country_life_expectancy,
-		c1.gnp				as country_gnp,
+		c1.GNP				as country_gnp,
 		c1.GNP_OLD			as country_gnp_old,
 		c1.LOCAL_NAME		as country_local_name,
 		c1.GOVERNMENT_FORM	as country_government_form,
@@ -99,5 +99,48 @@
 			on c1.CODE = c2.COUNTRY_CODE
 		where c1.code=#{code}
 </select>
+
+<insert id="insert">
+	insert into country
+	(
+		CODE,
+		NAME,
+		CONTINENT,
+		REGION,
+		SURFACE_AREA,
+		INDEP_YEAR,
+		POPULATION,
+		LIFE_EXPECTANCY,
+		GNP,
+		GNP_OLD,
+		LOCAL_NAME,
+		GOVERNMENT_FORM,
+		HEAD_OF_STATE,
+		CAPITAL,
+		CODE2
+	)
+	values
+	(
+		#{code},
+		#{name},
+		#{continent},
+		#{region},
+		#{surfaceArea},
+		#{indepYear},
+		#{population},
+		#{lifeExpectancy},
+		#{gnp},
+		#{gnpOld},
+		#{localName},
+		#{governmentForm},
+		#{headOfState},
+		#{capital},
+		#{code2}	
+	)
+</insert>
+
+<update id="updateByCode">
+
+</update>
 
 </mapper>

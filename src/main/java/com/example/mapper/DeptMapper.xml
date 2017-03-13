@@ -68,4 +68,22 @@ select
  where e.deptno=#{deptno}
 </select>
 
+<insert id="insert">
+	insert into dept
+	(
+		deptno,
+		dname,
+		loc
+	)
+	values
+	(
+		#{deptno},
+		#{dname},
+		#{loc}
+	)
+</insert>
+
+<update id="updateByDeptno">
+
+</update>
 </mapper>

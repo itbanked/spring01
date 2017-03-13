@@ -74,4 +74,29 @@ public class DeptMapperTests {
 			throw new NotFoundRuntimeException("부서정보가 없습니다");
 		System.out.println(d);
 	}
+	
+	@Test
+	public void test04_insert(){
+		Dept dept = new Dept();
+		dept.setDeptno(60);
+		dept.setDname("체육부");
+		
+		Dept d = mapper.selectByDeptno(dept.getDeptno());
+		
+		if(d != null){
+			System.out.println("해당 부서는 존재합니다.");
+			return;
+		}
+		
+		int cnt = mapper.insert(dept);
+		System.out.println(mapper.selectByDeptno(dept.getDeptno()));
+	}
+	
+	@Test
+	public void test05_deleteByDeptno(){
+		int deptno = 60;
+		int cnt = mapper.deleteByDeptno(deptno);
+		System.out.println("cnt = " + cnt);
+		System.out.println("dept = " + mapper.deleteByDeptno(deptno));
+	}
 }
